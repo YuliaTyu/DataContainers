@@ -50,10 +50,16 @@ public:
 	{
 		cout << "ITDestructor:\t" << this << endl;
 	}
-	Iterator& operator++()
+	Iterator& operator++()//префиксный
 	{
 		Temp = Temp->pNext;
 		return *this;
+	}
+	Iterator operator++(int)//постфиксный
+	{
+		Iterator old = *this;
+		Temp = Temp->pNext;
+		return old;
 	}
 	bool operator==(const Iterator& other)const
 	{
@@ -92,7 +98,7 @@ public:
 	}
 	Iterator end()
 	{
-		return nullptr;
+		return nullptr;     //всегда преобразуется в итератор и создает временный безымянный объект
 	}
 	ForwardList()
 	{
@@ -493,5 +499,10 @@ void main()
 	                                   //класса  initializer_list  
 	list.print();
 	for (int i : list)cout << i << tab; cout << endl;
-
+	cout << delimiter << endl;
+	for (Iterator it = list.begin(); it != list.end(); ++it)//чтоб не создавались копии используем постфикс
+	{
+		cout << *it << tab;
+	}
+	cout << endl;
 }
