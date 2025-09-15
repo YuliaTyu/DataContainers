@@ -1,5 +1,7 @@
 ﻿#include<iostream>
-using namespace std;
+using std::cin;
+using std::cout;
+using std::endl;
 
 #define tab "\t"
 #define delimiter "\n--------------------------\n"
@@ -27,11 +29,136 @@ class List
 
 	size_t size; //размер списка size_t  
 public:
+	class Iterator
+	{
+		Element* Temp;
+	public:
+		Iterator(Element* Temp=nullptr) : Temp(Temp) {}
+		~Iterator() {}
+
+		Iterator& operator++()
+		{
+			Temp = Temp->pNext;
+			return *this;
+		}
+		Iterator operator++(int)
+		{
+			Iterator old = *this;
+			Temp = Temp->pNext;
+			return old;
+		}
+		Iterator& operator--()
+		{
+			Temp = Temp->pNext;
+			return *this;
+		}
+		Iterator operator--(int)
+		{
+			Iterator old = *this;
+			Temp = Temp->pPrev;
+			return old;
+		}
+		
+		bool operator ==(const Iterator& other)const
+		{
+			return this->Temp == other.Temp;
+		}
+		bool operator !=(const Iterator& other)const
+		{
+			return this->Temp != other.Temp;
+		}
+
+		int operator *()const//перегружаем оператор разименования
+		{
+			return Temp->Data;
+		}
+		int& operator *()
+		{
+			return Temp->Data;
+		}
+	
+	};
+	class ReversIterator
+	{
+		Element* Temp;
+	public:
+		ReversIterator(Element* Temp = nullptr): Temp(Temp){}
+		~ReversIterator(){}
+		ReversIterator& operator++()
+		{
+			Temp = Temp->pPrev;
+			return *this;
+		}
+		ReversIterator operator++(int)
+		{
+			ReversIterator old = *this;
+			Temp = Temp->pPrev;
+			return old;
+		}
+		ReversIterator& operator--()
+		{
+			Temp = Temp->pNext;
+			return *this;
+		}
+		ReversIterator operator--(int)
+		{
+			ReversIterator old = *this;
+			Temp = Temp->pNext;
+			return old;
+		}
+
+		bool operator ==(const ReversIterator& other)const
+		{
+			return this->Temp == other.Temp;
+		}
+		bool operator !=(const ReversIterator& other)const
+		{
+			return this->Temp != other.Temp;
+		}
+		int operator*()const
+		{
+			return Temp->Data;
+		}
+		int& operator*()
+		{
+			return Temp->Data;
+		}
+	};
+
+	const Iterator begin()const
+	{
+		return Head;
+	}
+	const Iterator end()const
+	{
+		return nullptr;
+	}
+	ReversIterator rbegin()
+	{
+		return Tail;
+	}
+	ReversIterator rend()
+	{
+		return nullptr;
+	}
 	List()
 	{
 		Head = Tail = nullptr;
 		size = 0;
 		cout << "LConstructor\t" << this << endl;
+	}
+	List(const std::initializer_list<int>& il) :List() //к-р с одним параметром для первода другого типа в наш тип данных
+	{
+		for (int const* it = il.begin(); it != il.end(); ++it)
+		{
+			push_back(*it);
+		}
+		cout << "ILConstructor\t" << this << endl;
+	}
+	List(const List& other) : List()
+	{
+		*this = other;
+		cout << "LCOPYConstructor\t" << this << endl;
 	}
 	~List()
 	{
@@ -39,6 +166,17 @@ public:
 		while (Tail)pop_back();
 		cout << "LDestructor\t" << this << endl;
 	}
+
+	List& operator =(const List& other)
+	{
+		if (this == &other)return *this;
+		while (Head)pop_front();
+		for (Element* Temp = other.Head; Temp; Temp = Temp->pNext)
+			push_back(Temp->Data);
+		cout << "LCOPYAssignment\t" << this << endl;
+		return *this;
+	}
+
 
 	void push_front(int Data)
 	{
@@ -183,8 +321,16 @@ public:
 	}
 };
 
-//#define BASE_CHECK
+List operator+(const List& left, const List& right)
+{
+	List fusion = left;
+	for (List::Iterator it = right.begin(); it != right.end(); ++it)
+		fusion.push_back(*it*=100);//не должн
+	return fusion;
+}
 
+//#define BASE_CHECK
+#define HOME_WORK
 
 void main()
 {
@@ -217,5 +363,30 @@ void main()
 	list.Print();
 	list.Reverse_Print();
 #endif // BASE_CHECK
+
+#ifdef HOME_WORK
+
+	List list1 = { 3, 5, 8, 13, 21 };
+	List list2 = { 34, 55, 89 };
+	//list1.Print();
+	//list2.Print();
+	//list1.Reverse_Print();
+	//list2.Reverse_Print();
+	List list3 = list1 + list2;
+	for (int i : list1)cout << i << tab; cout << endl;
+	for (int i : list2)cout << i << tab; cout << endl;
+	for (int i : list3)cout << i << tab; cout << endl;
+	for (List::Iterator it = list1.begin(); it != list1.end(); ++it)
+	{
+		cout << *it << tab;
+	}
+	cout << endl;
+	for (List::ReversIterator it = list1.rbegin(); it != list1.rend(); ++it)
+	{
+		cout << *it << tab;
+	}
+	cout << endl;
+
+#endif // HOME_WORK
 
 }
