@@ -7,7 +7,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DataContainers", "DataConte
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ListHW", "ListHW\ListHW.vcxproj", "{2A5CCEEA-771E-462E-9464-86F6A1B3172D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Recurcion", "Recurcion\Recurcion.vcxproj", "{9541AE9F-DE35-461F-9B7E-D8C44C55B853}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Recursion", "Recurcion\Recurcion.vcxproj", "{9541AE9F-DE35-461F-9B7E-D8C44C55B853}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BinaryTree", "BinaryTree\BinaryTree.vcxproj", "{FAD6CFF5-6482-4828-9810-6ABC482AF691}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,14 @@ Global
 		{9541AE9F-DE35-461F-9B7E-D8C44C55B853}.Release|x64.Build.0 = Release|x64
 		{9541AE9F-DE35-461F-9B7E-D8C44C55B853}.Release|x86.ActiveCfg = Release|Win32
 		{9541AE9F-DE35-461F-9B7E-D8C44C55B853}.Release|x86.Build.0 = Release|Win32
+		{FAD6CFF5-6482-4828-9810-6ABC482AF691}.Debug|x64.ActiveCfg = Debug|x64
+		{FAD6CFF5-6482-4828-9810-6ABC482AF691}.Debug|x64.Build.0 = Debug|x64
+		{FAD6CFF5-6482-4828-9810-6ABC482AF691}.Debug|x86.ActiveCfg = Debug|Win32
+		{FAD6CFF5-6482-4828-9810-6ABC482AF691}.Debug|x86.Build.0 = Debug|Win32
+		{FAD6CFF5-6482-4828-9810-6ABC482AF691}.Release|x64.ActiveCfg = Release|x64
+		{FAD6CFF5-6482-4828-9810-6ABC482AF691}.Release|x64.Build.0 = Release|x64
+		{FAD6CFF5-6482-4828-9810-6ABC482AF691}.Release|x86.ActiveCfg = Release|Win32
+		{FAD6CFF5-6482-4828-9810-6ABC482AF691}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
