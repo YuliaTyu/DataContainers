@@ -1,5 +1,6 @@
 ﻿#include<iostream>
 #include<time.h>
+
 using std::cin;
 using std::cout;
 using std::endl;
@@ -90,6 +91,10 @@ public:
 		print(Root);
 		cout << endl;
 	}
+	int depth()const
+	{
+		return depth(Root);
+	}
 private:
 	void clear(Element*& Root)
 	{
@@ -164,7 +169,13 @@ private:
 	{
 		return Root == nullptr ? 0 : sum(Root->pLeft) + sum(Root->pRight) + Root->Data;
 	}
-
+	int depth(Element* Root)const// функция считает глубину дерева
+	{
+		if (Root == nullptr)return 0;
+		int l_depth = depth(Root->pLeft) + 1;
+		int r_depth = depth(Root->pRight) + 1;
+	    return l_depth < r_depth ? r_depth : l_depth;
+	}
 
 	void print(Element* Root)const
 	{
@@ -204,9 +215,7 @@ template<typename T> void measure_performance(const char message[], T(Tree::*fun
 	clock_t start = clock();
 	T result = (tree.*function)();
 	clock_t end = clock();
-
 	cout << message << result << " , вычеслено за" << double(end - start) / CLOCKS_PER_SEC << "секунд\n";
-
 }
 
 //#define BASE_CHECK
@@ -290,5 +299,6 @@ void main()
 	measure_performance("сумма знач ", &Tree::sum,tree);
 	measure_performance("кол-во ", &Tree::count,tree);
 	measure_performance("сред-ариф знач ", &Tree::avg,tree);
+	measure_performance("глубина ", &Tree::depth,tree);
 
 }
